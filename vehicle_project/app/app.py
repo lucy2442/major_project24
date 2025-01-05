@@ -18,15 +18,20 @@ pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"  # Adjust 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
+
 @app.route('/')
 def index():
     # Render the main page
     return render_template('index.html')
 
+
 @app.route('/scan')
 def scan():
-    # Render the scan page
-    return render_template('scan.html')
+    # Render the scan page with an active button based on selection (optional)
+    scan_type = request.args.get('scan_type')  # Get scan type from query string (optional)
+    active_button = 'upload' if scan_type == 'upload' else 'webcam'  # Set active button (optional)
+    return render_template('scan.html', active_button=active_button)  # Pass active button data (optional)
+
 
 @app.route('/scan-image', methods=['POST'])
 def scan_image():
@@ -44,47 +49,24 @@ def scan_image():
         # Process the uploaded image
         message = process_uploaded_image(file_path)
 
-        return jsonify({"message": message}), 200
+        # Display the message on the scan.html page (you might need to modify scan.html)
+        return render_template('scan.html', scan_result=message)
 
     return jsonify({"error": "Invalid file type. Allowed types: .png, .jpg, .jpeg"}), 400
+
 
 @app.route('/scan-webcam', methods=['GET'])
 def scan_webcam():
     # Start the webcam feed for number plate detection
     message = process_webcam_feed()
-    return jsonify({"message": message}), 200
-@app.route('/process_image', methods=['POST'])
-def process_image():
-    if 'image' not in request.files:
-        return jsonify({"message": "No file part"}), 400
 
-    file = request.files['image']
-    if file.filename == '':
-        return jsonify({"message": "No selected file"}), 400
+    # Display the message on the scan.html page (you might need to modify scan.html)
+    return render_template('scan.html', scan_result=message)
 
-    # Save image and process (you can call the existing function for image processing)
-    image_path = os.path.join('uploads', file.filename)
-    file.save(image_path)
-
-    # Process the image and return response
-    message = process_uploaded_image(image_path)  # Your function here
-    return jsonify({"message": message})
-
-@app.route('/process_webcam_feed', methods=['POST'])
-def process_webcam_feed():
-    if 'webcam_image' not in request.files:
-        return jsonify({"message": "No webcam image"}), 400
-
-    file = request.files['webcam_image']
-    image_path = os.path.join('uploads', 'webcam_image.jpg')
-    file.save(image_path)
-
-    # Process the webcam feed and return response
-    message = process_uploaded_image(image_path)  # Your function here
-    return jsonify({"message": message})
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 if __name__ == '__main__':
     app.run(debug=True)
