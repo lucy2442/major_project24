@@ -1,0 +1,12 @@
+{
+    "MH12JM6679": {
+        "owner": "John Doe",
+        "pending_amount": 500,
+        "violations": ["Signal Crossing", "No Helmet"]
+    },
+    "KL39N2338": {
+        "owner": "Jane Smith",
+        "pending_amount": 0,
+        "violations": []
+    }
+}

@@ -1,0 +1,761 @@
+/* General Reset */
+body, h1, h2, h3, p {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body Background */
+body {
+    background-color: #eaf6ff; /* Ice Blue */
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #0056b3;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: #0056b3;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #00274d;
+}
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #eaf6ff, #cce7ff);
+    text-align: center;
+    padding: 0 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: #00274d;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+}
+
+.cta-buttons .btn {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #003d80;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #495057;
+}
+
+/* Features Section */
+/* .features {
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.features h2 {
+    color: #0056b3;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+.features h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.features p {
+    color: #555;
+} */
+
+/* features****************************************************************** */
+ /* General Styles */
+.features {
+    background-color: #f9f9f9; /* Light background for better readability */
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Feature Titles */
+.features h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    position: relative;
+    color: #75adea; /* Primary color */
+    cursor: pointer;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+/* Underline Effect */
+.features h3::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 100%;
+    height: 2px;
+    background-color: #007bff;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+/* Hover and Click Effects */
+.features h3:hover {
+    color: #0056b3; /* Darker shade of primary color */
+    transform: scale(1.05); /* Slightly enlarge the text */
+}
+
+.features h3:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.features h3:active {
+    color: #004080; /* Even darker shade for active state */
+    transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+/* Feature Description */
+.features p {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 10px;
+    transition: color 0.3s ease;
+}
+
+.features h3:hover + p {
+    color: #333; /* Change description color on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .features h3 {
+        font-size: 1.3rem;
+    }
+
+    .features p {
+        font-size: 0.9rem;
+    }
+}
+
+
+/* Testimonials Section */
+.testimonials {
+    background-color: #f8f9fa;
+    padding: 50px 20px;
+}
+
+.testimonials h2 {
+    color: #0056b3;
+    margin-bottom: 30px;
+}
+
+blockquote {
+    font-style: italic;
+    border-left: 4px solid #0056b3;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+/* Contact Us Section */
+.contact h2 {
+    color: #0056b3;
+    margin-bottom: 30px;
+}
+
+.contact form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact .btn-primary {
+    background-color: #0056b3;
+    border: none;
+}
+
+.contact .btn-primary:hover {
+    background-color: #003d80;
+}
+
+/* Footer */
+footer {
+    background-color: #00274d;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 20px;
+}
+
+footer a {
+    color: #cce7ff;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .cta-buttons .btn {
+        font-size: 0.9rem;
+        padding: 8px 15px;
+    }
+
+    .features h3 {
+        font-size: 1.2rem;
+    }
+}
+
+/* Ensure the page uses full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Wrapper grows to fill the space between header and footer */
+.wrapper {
+    flex: 1;
+}
+
+/* Footer styling */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+/* //updated */
+
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #f8f9fa; /* Home page section background */
+}
+
+.wrapper {
+    flex: 1;
+}
+
+/* Navbar Styles */
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+/* Section Styling */
+.scan-section {
+    background-color: #f8f9fa; /* Same as Home Page */
+    padding: 3rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.animated-title {
+    font-size: 2.5rem;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.options .scan-button {
+    margin: 0 10px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.options .scan-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Webcam Placeholder */
+.webcam-placeholder {
+    background: #e9ecef;
+    border: 2px dashed #6c757d;
+    border-radius: 10px;
+    padding: 2rem;
+    color: #6c757d;
+    font-size: 1.2rem;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: #f8f9fa; /* Home page section background */
+}
+
+.wrapper {
+    flex: 1;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: #f8f9fa; /* Matches Home Page Navbar */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #000;
+}
+
+.nav-link {
+    color: #000;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #007bff;
+}
+
+/* Section Styling */
+.scan-section {
+    background-color: #f8f9fa; /* Same as Home Page */
+    padding: 3rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.animated-title {
+    font-size: 2.5rem;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.options .scan-button {
+    margin: 0 10px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.options .scan-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Webcam Placeholder */
+.webcam-placeholder {
+    background: #e9ecef;
+    border: 2px dashed #6c757d;
+    border-radius: 10px;
+    padding: 2rem;
+    color: #6c757d;
+    font-size: 1.2rem;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+
+
+/* manual entry section */
+/* Manual Entry Section */
+.manual-section {
+    background-color: #f8f9fa; /* Matches Home Page background */
+    padding: 3rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.manual-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    animation: fadeIn 1s ease-out;
+}
+
+.manual-section p {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+
+.manual-form {
+    max-width: 600px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Input and Button Styles */
+.manual-form .form-control, 
+.manual-form .form-select {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.manual-form .btn {
+    padding: 10px 20px;
+    margin: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.manual-form .btn:hover {
+    transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+/* Scan Section */
+
+.scan-section {
+    background-color: #f8f9fa; /* Light background */
+    padding: 40px 20px;
+}
+
+/* Animated Title */
+.animated-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Webcam Placeholder */
+.webcam-placeholder {
+    border: 2px dashed #007bff;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    text-align: center;
+    font-size: 1.2rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.webcam-placeholder:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Buttons */
+.scan-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+}
+
+.scan-button:hover {
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
+
+/* Keyframes for Title Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Custom Navbar */
+.custom-navbar {
+    background-color: #f8f9fa; /* Use the same background color as in the index.html navbar */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for a sleek design */
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: #007bff; /* Highlight active link */
+}
+
+.nav-link:hover {
+    color: #0056b3; /* Darker blue on hover */
+}
+
+
+/* voilation section css */
+ 
+.violations-section .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.violations-section .card:hover {
+    transform: scale(1.05);
+}
+
+.violations-section .card-header {
+    font-weight: bold;
+}
+
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+} 
+
+
+/* report section */
+
+body {
+    background-color: #f8f9fa; /* Matches the light background of the home page */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #ffffff; /* Navbar background */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out; /* Smooth transition for shadow effect */
+}
+
+.reports-section {
+    background-color: #eef9fc; /* Slightly ice-blue background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transitions */
+}
+
+.reports-section:hover {
+    background-color: #e3f4f9; /* Slightly darker ice-blue on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    transform: scale(1.02); /* Slight zoom effect */
+}
+
+.reports-section .card {
+    margin-top: 20px;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transitions */
+}
+
+.reports-section .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 10px 0;
+    text-align: center;
+    transition: background-color 0.3s ease-in-out; /* Smooth transition for footer */
+}
+
+footer:hover {
+    background-color: #495057; /* Slightly lighter gray */
+}
+
+/* Smooth transitions for form elements */
+form input,
+form textarea,
+form select {
+    border: 1px solid #ced4da; /* Neutral border */
+    border-radius: 4px;
+    transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth transitions */
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #80bdff; /* Blue outline on focus */
+    box-shadow: 0 0 4px rgba(128, 189, 255, 0.5); /* Subtle glow */
+    outline: none;
+}
+
+/* profile section */
+
+/* Navbar */
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    color: #333;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #007bff;
+}
+
+/* Profile Section */
+.profile-section {
+    background-color: #f8f9fa;
+    padding: 2rem 0;
+}
+
+.profile-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Footer */
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem 0;
+}
+
+
+/* profile section */
+.navbar .dropdown-menu {
+    min-width: 200px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.navbar .dropdown-item:active {
+    background-color: #e9ecef;
+    color: #000;
+}
