@@ -9,25 +9,43 @@ document.getElementById("pending-challans-form").addEventListener("submit", func
         return;
     }
 
-    // Make an API call to check pending challans
-    fetch(`/check_challan/${vehicleNumber}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.pending_amount > 0) {
-                document.getElementById("challanResult").innerHTML = `
-                    <div class="alert alert-info">
-                        Pending Challans: ₹${data.pending_amount}. Violations: ${data.violations.join(", ")}
-                    </div>`;
-            } else {
-                document.getElementById("challanResult").innerHTML = `
-                    <div class="alert alert-success">No pending challans.</div>`;
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            document.getElementById("challanResult").innerHTML = `
-                <div class="alert alert-danger">Error checking challans. Please try again later.</div>`;
-        });
+document.getElementById('pending-challans-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const vehicleNumber = document.getElementById('challanVehicleNumber').value.trim();
+    const resultContainer = document.getElementById('challanResult');
+    resultContainer.innerHTML = '<p>Loading...</p>';
+
+    // Send POST request to Flask backend
+    fetch('/check-challans', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ vehicle_number: vehicleNumber })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            let resultHtml = '<h5>Challans:</h5><ul>';
+            data.data.challans.forEach(challan => {
+                resultHtml += `
+                    <li>
+                        Date: ${challan.date}<br>
+                        Violation: ${challan.violation}<br>
+                        Amount: ₹${challan.amount}
+                    </li>`;
+            });
+            resultHtml += '</ul>';
+            resultContainer.innerHTML = resultHtml;
+        } else {
+            resultContainer.innerHTML = `<p>${data.message}</p>`;
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        resultContainer.innerHTML = '<p>Error checking challans. Please try again later.</p>';
+    });
 });
 
 // Handle Triple Seat Violation Detection Form Submission

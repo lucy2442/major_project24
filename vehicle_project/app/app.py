@@ -115,27 +115,43 @@ def process_frame_endpoint():
         return jsonify({"success": False, "error": str(e)})
 
 
-@app.route('/check_challan/<vehicle_number>', methods=['GET'])
-def check_challan(vehicle_number):
-    # Simulated data for pending challans
-    vehicle_data = {
-        "MH12JM6679": {
-            "pending_amount": 500,
-            "violations": ["Signal Crossing", "No Helmet"]
-        },
-        "KL39N2338": {
-            "pending_amount": 0,
-            "violations": []
+# Load the JSON data
+def load_challans_data():
+    with open('data/challans.json') as f:
+        return json.load(f)
+
+
+@app.route('/check_challans', methods=['POST'])
+def check_challans():
+    # Log vehicle number
+    print(f"Request Form: {request.form}")
+
+    if 'vehicle_number' not in request.form:
+        return jsonify({'error': 'Vehicle number is missing'}), 400
+
+    vehicle_number = request.form['vehicle_number']
+
+    # Simulate checking challans
+    with open('/Users/rohit12300/PycharmProjects/major_project24/data1.json') as f:
+        data = json.load(f)
+
+    if vehicle_number in data:
+        vehicle_info = data[vehicle_number]
+        response = {
+            'status': 'success',
+            'data': {
+                'vehicle_number': vehicle_number,
+                'owner': vehicle_info['owner'],
+                'pending_amount': vehicle_info['pending_amount'],
+                'violations': vehicle_info['violations']
+            }
         }
-    }
-
-    if vehicle_number in vehicle_data:
-        return jsonify(vehicle_data[vehicle_number])
     else:
-        return jsonify({"error": "Vehicle not found"}), 404
+        response = {'status': 'error', 'data': 'Vehicle number not found.'}
 
-
-# Route to handle triple seat violation detection
+    # Log response
+    print(f"Response: {response}")
+    return jsonify(response)
 @app.route('/detect_triple_seat', methods=['POST'])
 def detect_triple_seat():
     # Simulate detection (you should replace this with actual image processing)

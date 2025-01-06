@@ -1,0 +1,36 @@
+{
+    "MH12JM6679": {
+        "owner": "John Doe",
+        "pending_amount": 800,
+        "violations": [
+            "Signal Crossing",
+            "No Helmet",
+            "Over Speeding"
+        ]
+    },
+    "KL39N2338": {
+        "owner": "Jane Smith",
+        "pending_amount": 0,
+        "violations": []
+    },
+    "DL8CA9801": {
+        "owner": "Rajesh Kumar",
+        "pending_amount": 1500,
+        "violations": [
+            "Parking in No Parking Zone",
+            "Over Speeding"
+        ]
+    },
+    "AP16BX2341": {
+        "owner": "Priya Sharma",
+        "pending_amount": 200,
+        "violations": [
+            "No Seatbelt"
+        ]
+    },
+    "TN22CZ7894": {
+        "owner": "Arun Vijay",
+        "pending_amount": 0,
+        "violations": []
+    }
+}
