@@ -2,11 +2,234 @@
     "MH12JM6679": {
         "owner": "John Doe",
         "pending_amount": 500,
-        "violations": ["Signal Crossing", "No Helmet"]
+        "violations": [
+            "Signal Crossing",
+            "No Helmet"
+        ]
     },
     "KL39N2338": {
         "owner": "Jane Smith",
         "pending_amount": 0,
+        "violations": []
+    },
+    "HH12JM6673": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "P2INSS79": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "112JM6679J": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "IMH12ZIMGE": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "HH12JH6675": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "H12JM6675": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MH112JH5679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "12JN6679J": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "412JK6679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "H12JM6679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MHIZJMB679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "H12JH6679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MH12JKE679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "H1ZJMG673": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MH1ZJME679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MH12JM6675": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "SES": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MH12JMGE791": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MH12JHE679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "SMHIZJMG75": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "HH12JN6579A": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "HIZIMEE79": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "HH12ZIM6675": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "5731": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "H1ZJM66791": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "HHIZIMEE7911": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "412IN67M": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "12JH6675": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "H12JMEE79": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "12JM66735": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "125M6679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "112JM6675": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "12JM6679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "2JN6673": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MH12JNS679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "H12JME673": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "ML4I": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "MH12JM6E": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "12JM6673": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "12JH6679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "M12JM6679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "H12JMG673I": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "112JM6679": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
+        "violations": []
+    },
+    "12JM66739": {
+        "owner": "Unknown",
+        "pending_amount": "Unknown",
         "violations": []
     }
 }

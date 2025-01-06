@@ -1,69 +1,67 @@
-window.onload = function() {
-    const webcamButton = document.querySelector('.scan-button:nth-child(2)');
-    const uploadButton = document.querySelector('.scan-button:nth-child(1)');
-    const webcamFeedElement = document.getElementById('webcam-feed');
-    const webcamVideo = document.getElementById('webcam-video');
-    const fileInput = document.createElement('input');
-    fileInput.type = 'file';
-    fileInput.accept = 'image/*';
+document.addEventListener("DOMContentLoaded", () => {
+    const webcamVideo = document.getElementById("webcam-video");
+    const canvas = document.getElementById("webcam-canvas");
+    const resultText = document.getElementById("result-text");
+    const webcamBtn = document.getElementById("webcam-btn");
+    const stopBtn = document.getElementById("stop-btn");  // Button to stop webcam
 
-    // Function to handle webcam stream
-    function startWebcam() {
-        console.log("Webcam button clicked. Attempting to start webcam...");
+    let webcamStream;
+    let isProcessing = false;  // Prevent multiple requests
 
-        // Check if webcam feed element exists
-        if (webcamFeedElement && webcamVideo) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(stream => {
-                    console.log("Webcam stream successfully acquired.");
-                    webcamVideo.srcObject = stream;
-                    webcamVideo.style.display = "block"; // Show the webcam feed
-                    webcamFeedElement.innerHTML = ""; // Clear placeholder text
-                })
-                .catch(error => {
-                    console.error("Error accessing webcam:", error);
-                    webcamFeedElement.innerHTML = "Error accessing webcam: " + error.message;
-                });
+    webcamBtn.addEventListener("click", async () => {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            try {
+                webcamStream = await navigator.mediaDevices.getUserMedia({ video: true });
+                webcamVideo.srcObject = webcamStream;
+                webcamVideo.style.display = "block";
+                processFrames();
+            } catch (err) {
+                resultText.textContent = "Error accessing webcam: " + err.message;
+            }
         } else {
-            console.error("Webcam feed element not found");
+            resultText.textContent = "Your browser does not support webcam access.";
         }
-    }
-
-    // Function to handle image upload
-    function handleImageUpload(event) {
-        const file = event.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = function() {
-                    // Call your function to process the uploaded image here
-                    processUploadedImage(img);
-                };
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    // Function to process uploaded image
-    function processUploadedImage(image) {
-        console.log("Processing uploaded image...");
-        // Add your image processing logic here (e.g., passing to backend for OCR and detection)
-        alert("Image processing functionality to be implemented.");
-    }
-
-    // Event listener for upload button
-    uploadButton.addEventListener('click', function() {
-        fileInput.click();
     });
 
-    // Event listener for file input change (image selection)
-    fileInput.addEventListener('change', handleImageUpload);
+    // Stop webcam stream when stop button is clicked
+    stopBtn.addEventListener("click", () => {
+        if (webcamStream) {
+            webcamStream.getTracks().forEach(track => track.stop());
+            webcamVideo.style.display = "none";
+            resultText.textContent = "Webcam stopped.";
+        }
+    });
 
-    // Event listener for webcam button
-    webcamButton.addEventListener('click', startWebcam);
+    async function processFrames() {
+        const ctx = canvas.getContext("2d");
 
-    // Display the webcam feed placeholder text initially
-    webcamFeedElement.innerHTML = "<p class='text-muted'>Webcam feed will appear here.</p>";
-};
+        setInterval(async () => {
+            if (isProcessing) return;  // Skip if still processing the previous frame
+            isProcessing = true;  // Mark as processing
+
+            // Capture frame from the video
+            ctx.drawImage(webcamVideo, 0, 0, canvas.width, canvas.height);
+            const frameData = canvas.toDataURL("image/jpeg");
+
+            try {
+                const response = await fetch("/process-frame", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ frame: frameData })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    resultText.textContent = `Detected Plate: ${result.plate}\n` +
+                        `Owner: ${result.owner}\nPending Amount: ${result.pending_amount}\nViolations: ${result.violations}`;
+                } else {
+                    resultText.textContent = result.error || "No plate detected.";
+                }
+            } catch (error) {
+                resultText.textContent = "Error processing frame: " + error.message;
+            }
+
+            isProcessing = false;  // Mark as done processing
+        }, 1000); // Process a frame every second
+    }
+});

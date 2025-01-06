@@ -9,19 +9,26 @@ document.getElementById("pending-challans-form").addEventListener("submit", func
         return;
     }
 
-    // Simulate an API call to check pending challans
-    // In a real-world scenario, you can use an API call here to fetch challan data
-    const result = checkPendingChallans(vehicleNumber);
-
-    document.getElementById("challanResult").innerHTML = result;
+    // Make an API call to check pending challans
+    fetch(`/check_challan/${vehicleNumber}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.pending_amount > 0) {
+                document.getElementById("challanResult").innerHTML = `
+                    <div class="alert alert-info">
+                        Pending Challans: ₹${data.pending_amount}. Violations: ${data.violations.join(", ")}
+                    </div>`;
+            } else {
+                document.getElementById("challanResult").innerHTML = `
+                    <div class="alert alert-success">No pending challans.</div>`;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById("challanResult").innerHTML = `
+                <div class="alert alert-danger">Error checking challans. Please try again later.</div>`;
+        });
 });
-
-// Simulate checking for pending challans (Mock function for now)
-function checkPendingChallans(vehicleNumber) {
-    // Simulate a successful result (this should be replaced with an actual API request)
-    const randomResult = Math.random() > 0.5 ? "Pending challans found!" : "No pending challans.";
-    return `<div class="alert alert-info">${randomResult}</div>`;
-}
 
 // Handle Triple Seat Violation Detection Form Submission
 document.getElementById("triple-seat-form").addEventListener("submit", function(event) {
@@ -34,18 +41,24 @@ document.getElementById("triple-seat-form").addEventListener("submit", function(
         return;
     }
 
-    // Simulate detecting triple seat violation
-    // In a real-world scenario, you should send the image to a server for analysis
-    const result = detectTripleSeatViolation(vehicleImage);
+    const formData = new FormData();
+    formData.append('vehicleImage', vehicleImage);
 
-    document.getElementById("tripleSeatResult").innerHTML = result;
+    fetch('/detect_triple_seat', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("tripleSeatResult").innerHTML = `
+                <div class="alert alert-warning">${data.result}</div>`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById("tripleSeatResult").innerHTML = `
+                <div class="alert alert-danger">Error detecting violation. Please try again later.</div>`;
+        });
 });
-
-// Simulate triple seat violation detection (Mock function for now)
-function detectTripleSeatViolation(vehicleImage) {
-    const randomResult = Math.random() > 0.5 ? "Triple seat violation detected!" : "No triple seat violation detected.";
-    return `<div class="alert alert-warning">${randomResult}</div>`;
-}
 
 // Handle Red Line Violation Detection Form Submission
 document.getElementById("red-line-form").addEventListener("submit", function(event) {
@@ -58,15 +71,21 @@ document.getElementById("red-line-form").addEventListener("submit", function(eve
         return;
     }
 
-    // Simulate red line violation detection
-    // In a real-world scenario, you should send the image to a server for analysis
-    const result = detectRedLineViolation(redLineImage);
+    const formData = new FormData();
+    formData.append('redLineImage', redLineImage);
 
-    document.getElementById("redLineResult").innerHTML = result;
+    fetch('/detect_red_line', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById("redLineResult").innerHTML = `
+                <div class="alert alert-danger">${data.result}</div>`;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById("redLineResult").innerHTML = `
+                <div class="alert alert-danger">Error detecting violation. Please try again later.</div>`;
+        });
 });
-
-// Simulate red line violation detection (Mock function for now)
-function detectRedLineViolation(redLineImage) {
-    const randomResult = Math.random() > 0.5 ? "Red line violation detected!" : "No red line violation detected.";
-    return `<div class="alert alert-danger">${randomResult}</div>`;
-}

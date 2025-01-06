@@ -21,7 +21,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                         <li class="nav-item"><a class="nav-link active" href="scan.html">Scan Number Plate</a></li>
-                        <li class="nav-item"><a class="nav-link" href="manualentry.html">Manual Entry</a></li>
+
                         <li class="nav-item"><a class="nav-link" href="voilation.html">Violations</a></li>
                         <li class="nav-item"><a class="nav-link" href="report.html">Reports</a></li>
                         <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
@@ -39,12 +39,18 @@
                 </div>
                 <!-- Image Upload Section -->
 
+            <!-- Webcam Feed Section -->
+<div id="webcam-feed" class="webcam-placeholder mx-auto p-4">
+    <video id="webcam-video" autoplay></video>
+    <canvas id="webcam-canvas" style="display:none;"></canvas>
+</div>
 
-                <!-- Webcam Feed Section -->
-                <div id="webcam-feed" class="webcam-placeholder mx-auto p-4">
-                    <video id="webcam-video" autoplay style="display:none;"></video>
-                </div>
-
+<!-- Scan Results Section -->
+<div id="scan-results" class="text-center mt-4">
+    <h3>Detected Vehicle Data:</h3>
+    <p id="result-text" class="alert alert-info">Results will appear here after scanning...</p>
+</div>
+<button id="stop-btn">Stop Webcam</button>
 
             </div>
         </section>
