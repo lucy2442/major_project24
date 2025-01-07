@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify,redirect, url_for, flash, session
 import os
 import cv2
 import pytesseract
 import json
+import sqlite3
 import base64
 import numpy as np
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Path to Tesseract executable
 pytesseract.pytesseract.tesseract_cmd = "/opt/homebrew/bin/tesseract"  # Adjust path as needed
@@ -18,11 +21,89 @@ if plate_cascade.empty():
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'  # SQLite database
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # Ensure the uploads directory exists
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
+
+
+def init_db():
+    conn = sqlite3.connect('users.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+    )
+    ''')
+    conn.commit()
+    conn.close()
+
+init_db()
+
+@app.route('/')
+def home():
+    return render_template('login.html')
+@app.route("/home_index")
+def index():
+    return render_template('index.html')
+from werkzeug.security import check_password_hash
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Check credentials
+        conn = sqlite3.connect('users.db')
+        cursor = conn.cursor()
+        cursor.execute('SELECT password FROM users WHERE username = ?', (username,))
+        user = cursor.fetchone()
+        conn.close()
+
+        if user and check_password_hash(user[0], password):
+            flash('Logged in successfully!', 'success')
+            return redirect(url_for('index'))
+        else:
+            flash('Invalid username or password.', 'danger')
+
+    return render_template('login.html')
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        # Hash the password for security
+        hashed_password = generate_password_hash(password, method='pbkdf2:sha256')
+
+        try:
+            # Store user in the database
+            conn = sqlite3.connect('users.db')
+            cursor = conn.cursor()
+            cursor.execute('INSERT INTO users (username, password) VALUES (?, ?)', (username, hashed_password))
+            conn.commit()
+            conn.close()
+
+            flash('Account created successfully! You can now log in.', 'success')
+            return redirect(url_for('login'))
+        except sqlite3.IntegrityError:
+            flash('Username already exists. Please choose a different username.', 'danger')
+
+    return render_template('signup.html')
+
+
+
+
 
 
 # Function to fetch vehicle data from a JSON file
@@ -73,16 +154,18 @@ def process_frame(frame):
         return {"error": str(e)}
 
 
-@app.route('/')
-def index():
-    # Render the main page
-    return render_template('index.html')
+
 
 
 @app.route('/violations')
 def violations():
     return render_template('voilation.html')
-
+@app.route('/home_reports')
+def home_reports():
+    return render_template('report.html')
+@app.route('/home_profile')
+def home_profile():
+    return render_template('profile.html')
 @app.route('/scan')
 def scan():
     # Render the scan page with an active button based on selection (optional)
@@ -173,5 +256,8 @@ def detect_red_line():
         result = "Red line violation detected!" if random.random() > 0.5 else "No red line violation detected."
         return jsonify({"result": result})
     return jsonify({"error": "No image provided"}), 400
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
